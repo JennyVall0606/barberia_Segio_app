@@ -13,6 +13,8 @@ router.get('/:id', (req, res) => {
   res.json(servicio)
 })
 
+
+
 router.post('/', async (req, res) => {
   const { nombre, descripcion, precio, duracion } = req.body
   if (!nombre || precio == null) return res.status(400).json({ error: 'nombre y precio son requeridos' })

@@ -10,6 +10,8 @@ const PORT = 3001
 app.use(cors())
 app.use(express.json())
 
+
+
 app.use('/api/clientes', clientesRouter)
 app.use('/api/servicios', serviciosRouter)
 app.use('/api/citas', citasRouter)
