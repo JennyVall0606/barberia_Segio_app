@@ -4,7 +4,7 @@ import api from '../api/client'
 import Modal from '../components/Modal'
 import ErrorAlert from '../components/ErrorAlert'
 
-const emptyForm = { nombre: '', precio: '', duracion_minutos: '' }
+const emptyForm = { nombre: '', precio: '', duracion: '' }
 
 export default function Servicios() {
   const { state, dispatch } = useApp()
@@ -31,7 +31,7 @@ export default function Servicios() {
     setForm({
       nombre: servicio.nombre,
       precio: servicio.precio,
-      duracion_minutos: servicio.duracion_minutos,
+      duracion: servicio.duracion,
     })
     setShowModal(true)
   }
@@ -52,7 +52,7 @@ export default function Servicios() {
     const payload = {
       nombre: form.nombre,
       precio: parseFloat(form.precio),
-      duracion_minutos: parseInt(form.duracion_minutos, 10),
+      duracion: parseInt(form.duracion, 10),
     }
     try {
       if (editing) {
@@ -114,7 +114,7 @@ export default function Servicios() {
                   ${Number(s.precio).toFixed(2)}
                 </span>
               </div>
-              <p className="text-stone-500 text-sm">⏱ {s.duracion_minutos} minutos</p>
+              <p className="text-stone-500 text-sm">⏱ {s.duracion} minutos</p>
               <div className="flex gap-2 mt-auto pt-2 border-t border-stone-100">
                 <button
                   onClick={() => openEdit(s)}
@@ -164,8 +164,8 @@ export default function Servicios() {
               <label className="block text-sm font-medium text-stone-700 mb-1">Duración (minutos)</label>
               <input
                 type="number"
-                name="duracion_minutos"
-                value={form.duracion_minutos}
+                name="duracion"
+                value={form.duracion}
                 onChange={handleChange}
                 required
                 min="1"

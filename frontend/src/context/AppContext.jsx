@@ -58,6 +58,13 @@ function appReducer(state, action) {
       return { ...state, citas: action.payload, loading: false }
     case 'ADD_CITA':
       return { ...state, citas: [...state.citas, action.payload] }
+    case 'UPDATE_CITA':
+      return {
+        ...state,
+        citas: state.citas.map(c =>
+          c.id === action.payload.id ? action.payload : c
+        ),
+      }
     case 'CANCEL_CITA':
       return {
         ...state,

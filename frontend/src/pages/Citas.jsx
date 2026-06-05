@@ -51,8 +51,8 @@ export default function Citas() {
     e.preventDefault()
     setSaving(true)
     const payload = {
-      cliente_id: parseInt(form.cliente_id, 10),
-      servicio_id: parseInt(form.servicio_id, 10),
+      cliente_id: form.cliente_id,
+      servicio_id: form.servicio_id,
       fecha: form.fecha,
       hora: form.hora,
       estado: 'pendiente',
@@ -71,10 +71,20 @@ export default function Citas() {
   async function handleCancel(id) {
     if (!confirm('¿Cancelar esta cita?')) return
     try {
-      await api.patch(`/citas/${id}`, { estado: 'cancelada' })
-      dispatch({ type: 'CANCEL_CITA', payload: id })
+      const { data } = await api.put(`/citas/${id}`, { estado: 'cancelada' })
+      dispatch({ type: 'UPDATE_CITA', payload: data })
     } catch {
       dispatch({ type: 'SET_ERROR', payload: 'Error al cancelar la cita' })
+    }
+  }
+
+  async function handleComplete(id) {
+    if (!confirm('¿Marcar esta cita como completada?')) return
+    try {
+      const { data } = await api.put(`/citas/${id}`, { estado: 'completada' })
+      dispatch({ type: 'UPDATE_CITA', payload: data })
+    } catch {
+      dispatch({ type: 'SET_ERROR', payload: 'Error al completar la cita' })
     }
   }
 
@@ -113,10 +123,24 @@ export default function Citas() {
       ) : (
         <>
           {pendientes.length > 0 && (
-            <Section title="Pendientes" citas={pendientes} onCancel={handleCancel} getClienteName={getClienteName} getServicioName={getServicioName} />
+            <Section
+              title="Pendientes"
+              citas={pendientes}
+              onCancel={handleCancel}
+              onComplete={handleComplete}
+              getClienteName={getClienteName}
+              getServicioName={getServicioName}
+            />
           )}
           {resto.length > 0 && (
-            <Section title="Historial" citas={resto} onCancel={null} getClienteName={getClienteName} getServicioName={getServicioName} />
+            <Section
+              title="Historial"
+              citas={resto}
+              onCancel={null}
+              onComplete={null}
+              getClienteName={getClienteName}
+              getServicioName={getServicioName}
+            />
           )}
         </>
       )}
@@ -151,7 +175,7 @@ export default function Citas() {
                 <option value="">Seleccionar servicio...</option>
                 {state.servicios.map(s => (
                   <option key={s.id} value={s.id}>
-                    {s.nombre} — ${Number(s.precio).toFixed(2)} ({s.duracion_minutos} min)
+                    {s.nombre} — ${Number(s.precio).toLocaleString('es-CO')} ({s.duracion} min)
                   </option>
                 ))}
               </select>
@@ -199,7 +223,7 @@ export default function Citas() {
   )
 }
 
-function Section({ title, citas, onCancel, getClienteName, getServicioName }) {
+function Section({ title, citas, onCancel, onComplete, getClienteName, getServicioName }) {
   return (
     <div className="mb-8">
       <h2 className="text-sm font-semibold text-stone-500 uppercase tracking-wide mb-3">{title}</h2>
@@ -212,7 +236,7 @@ function Section({ title, citas, onCancel, getClienteName, getServicioName }) {
               <th className="px-4 py-3 text-left">Fecha</th>
               <th className="px-4 py-3 text-left">Hora</th>
               <th className="px-4 py-3 text-left">Estado</th>
-              {onCancel && <th className="px-4 py-3 text-right">Acción</th>}
+              {(onCancel || onComplete) && <th className="px-4 py-3 text-right">Acciones</th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-stone-100">
@@ -227,14 +251,26 @@ function Section({ title, citas, onCancel, getClienteName, getServicioName }) {
                     {c.estado}
                   </span>
                 </td>
-                {onCancel && (
+                {(onCancel || onComplete) && (
                   <td className="px-4 py-3 text-right">
-                    <button
-                      onClick={() => onCancel(c.id)}
-                      className="text-xs px-3 py-1 rounded-md border border-red-200 text-red-600 hover:bg-red-50 transition-colors"
-                    >
-                      Cancelar
-                    </button>
+                    <div className="flex justify-end gap-2">
+                      {onComplete && (
+                        <button
+                          onClick={() => onComplete(c.id)}
+                          className="text-xs px-3 py-1 rounded-md border border-green-300 text-green-700 hover:bg-green-50 transition-colors"
+                        >
+                          ✓ Completada
+                        </button>
+                      )}
+                      {onCancel && (
+                        <button
+                          onClick={() => onCancel(c.id)}
+                          className="text-xs px-3 py-1 rounded-md border border-red-200 text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          Cancelar
+                        </button>
+                      )}
+                    </div>
                   </td>
                 )}
               </tr>
