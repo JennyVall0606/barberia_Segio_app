@@ -1,5 +1,112 @@
 {
-  "clientes": [],
-  "servicios": [],
-  "citas": []
+  "clientes": [
+    {
+      "id": "6006911f-5748-4642-aef9-1d3852f16c0f",
+      "nombre": "Sergio ",
+      "telefono": "3132582077",
+      "email": "sergio@gmail.com",
+      "createdAt": "2026-06-05T02:13:46.000Z"
+    },
+    {
+      "id": "7bd8c9d3-096e-4481-bb1a-972c60c718b3",
+      "nombre": "Lucas",
+      "telefono": "123",
+      "email": "lucas@gmail.com",
+      "createdAt": "2026-06-05T02:14:14.598Z"
+    },
+    {
+      "id": "f636eb04-b26e-4766-885c-c5a6307d0243",
+      "nombre": "jenny",
+      "telefono": "",
+      "email": "jenny@gmail.com",
+      "createdAt": "2026-06-05T02:14:26.031Z"
+    },
+    {
+      "id": "aa64fab4-7a1b-4fec-9d58-c8eeab9533d3",
+      "nombre": "Alexandra ",
+      "telefono": "",
+      "email": "alexandra@gmail.com",
+      "createdAt": "2026-06-05T02:14:45.102Z"
+    }
+  ],
+  "servicios": [
+    {
+      "id": "8d523901-91c1-4102-b108-0041fe0e2318",
+      "nombre": "Corte de cabello",
+      "descripcion": "",
+      "precio": 25,
+      "duracion": 30,
+      "createdAt": "2026-06-05T02:17:09.574Z"
+    },
+    {
+      "id": "5d966879-125c-4663-b96d-602142b722dd",
+      "nombre": "Afeitado clásico",
+      "descripcion": "",
+      "precio": 20,
+      "duracion": 30,
+      "createdAt": "2026-06-05T02:17:23.537Z"
+    },
+    {
+      "id": "9e413ad1-b75f-46bb-969c-11b332fd9063",
+      "nombre": "Corte y barba",
+      "descripcion": "",
+      "precio": 40,
+      "duracion": 30,
+      "createdAt": "2026-06-05T02:17:41.588Z"
+    },
+    {
+      "id": "8c7deb48-0e09-47b3-9167-7f6ff9f16c89",
+      "nombre": "Arreglo de barba",
+      "descripcion": "",
+      "precio": 18,
+      "duracion": 30,
+      "createdAt": "2026-06-05T02:17:59.814Z"
+    },
+    {
+      "id": "d545cd56-d02a-4688-a694-6e53a26ad251",
+      "nombre": "Tratamiento capilar",
+      "descripcion": "",
+      "precio": 35,
+      "duracion": 30,
+      "createdAt": "2026-06-05T02:18:15.175Z"
+    }
+  ],
+  "citas": [
+    {
+      "id": "a18c79c9-426e-452a-8369-1737d256e671",
+      "cliente_id": "6006911f-5748-4642-aef9-1d3852f16c0f",
+      "servicio_id": "8d523901-91c1-4102-b108-0041fe0e2318",
+      "fecha": "2026-06-04",
+      "hora": "10:41",
+      "estado": "cancelada",
+      "createdAt": "2026-06-05T02:21:19.106Z"
+    },
+    {
+      "id": "b3900b82-635f-4bc8-8dbc-20d4934ee3c8",
+      "cliente_id": "7bd8c9d3-096e-4481-bb1a-972c60c718b3",
+      "servicio_id": "8c7deb48-0e09-47b3-9167-7f6ff9f16c89",
+      "fecha": "2026-06-05",
+      "hora": "23:23",
+      "estado": "cancelada",
+      "createdAt": "2026-06-05T02:21:37.959Z"
+    },
+    {
+      "id": "1dcf23ea-fe20-44e6-9102-58796c351294",
+      "cliente_id": "6006911f-5748-4642-aef9-1d3852f16c0f",
+      "servicio_id": "8d523901-91c1-4102-b108-0041fe0e2318",
+      "fecha": "2026-06-03",
+      "hora": "22:22",
+      "estado": "cancelada",
+      "createdAt": "2026-06-05T02:22:10.160Z"
+    },
+    {
+      "id": "027c8b81-b71b-4876-b990-1f85ae0a1cc1",
+      "cliente_id": "6006911f-5748-4642-aef9-1d3852f16c0f",
+      "servicio_id": "8d523901-91c1-4102-b108-0041fe0e2318",
+      "fecha": "2026-06-02",
+      "hora": "21:27",
+      "estado": "completada",
+      "createdAt": "2026-06-05T02:27:15.843Z"
+    }
+  ]
 }
